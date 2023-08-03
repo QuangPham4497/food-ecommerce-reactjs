@@ -10,13 +10,9 @@ const ProductDetailPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getList")
+      .get(`http://localhost:5000/getProductDetail/${id}`)
       .then((products) => {
-        const filteredProducts = products.data.filter(
-          (item) => item._id === id
-        );
-
-        setProductDetail(filteredProducts[0]);
+        setProductDetail(products.data);
       })
       .catch((error) => {
         console.error(error);

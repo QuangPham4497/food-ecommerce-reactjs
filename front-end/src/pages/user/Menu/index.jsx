@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Link, generatePath } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const MenuPage = () => {

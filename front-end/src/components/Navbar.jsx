@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 // import MobileMenu from "./MobileMenu";
 import { Link } from "react-router-dom";
 // import CartIcon from "./CartIcon";
-
+import { useEffect } from "react";
+import axios from "axios";
+import { Button } from "antd";
+import { UserContext } from "UserContext";
 const links = [
   { id: 1, title: "Homepage", url: "/" },
   { id: 2, title: "Menu", url: "/menu" },
@@ -11,7 +14,28 @@ const links = [
 ];
 
 const Navbar = () => {
-  const user = false;
+  const { userInfo, setUserInfo } = useContext(UserContext);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/profile", {
+      credentials: "include",
+    }).then((response) => {
+      response.json().then((userInfo) => {
+        setUserInfo(userInfo);
+      });
+    });
+  }, []);
+
+  function logout() {
+    axios.post("http://localhost:5000/logout", null, {
+      withCredentials: true,
+    });
+    setUserInfo(null);
+  }
+
+  const username = userInfo?.username;
+  console.log("🚀 ~ file: Navbar.jsx:37 ~ Navbar ~ username:", username);
+
   return (
     <div className="h-12 text-red-500 p-4 flex items-center justify-between border-b-2 border-b-red-500 uppercase md:h-24 lg:px-20 xl:px-40">
       {/* LEFT LINKS */}
@@ -37,14 +61,17 @@ const Navbar = () => {
           <img src="/images/phone.png" alt="" width={20} height={20} />
           <span>123 456 78</span>
         </div>
-        {!user ? (
+        {!username ? (
           <Link to="/login" className="hover:bg-slate-300">
             Login
           </Link>
         ) : (
-          <Link to="/orders" className="hover:bg-slate-300">
-            Orders
-          </Link>
+          <>
+            <Link to="/orders" className="hover:bg-slate-300">
+              Orders
+            </Link>
+            <Button onClick={logout}>Log out</Button>
+          </>
         )}
         {/* <CartIcon /> */}
       </div>
