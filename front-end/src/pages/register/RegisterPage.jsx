@@ -137,15 +137,15 @@ const RegisterPage = () => {
           }}
         >
           <Button type="primary" danger htmlType="submit" className="">
-            Đăng kí
+            Register
           </Button>
         </Form.Item>
       </Form>
       <h5 className="register-yet">
-        <span>Đã có tài khoản? </span>
+        <span>Have account? </span>
         <Link to="/login">
           <i>
-            <u>Đăng nhập ngay</u>
+            <u>Login</u>
           </i>
         </Link>
       </h5>

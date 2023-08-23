@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -37,7 +38,9 @@ const Slider = () => {
         <h1 className="text-5xl text-center uppercase p-4 md:p-10 md:text-6xl xl:text-7xl">
           {data[currentSlide].title}
         </h1>
-        <button className="bg-red-500 text-white py-4 px-8">Order Now</button>
+        <button className="bg-red-500 text-white py-4 px-8">
+          <Link to="/menu">Order Now</Link>
+        </button>
       </div>
       {/* IMAGE CONTAINER */}
       <div className="w-full flex-1 relative md:h-full">

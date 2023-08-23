@@ -98,10 +98,10 @@ const LoginPage = () => {
         </Form.Item>
       </Form>
       <h5 className="register-yet">
-        <span>Chưa có tài khoản? </span>
+        <span>No account? </span>
         <Link to="/register">
           <i>
-            <u>Đăng kí ngay</u>
+            <u>Register</u>
           </i>
         </Link>
       </h5>

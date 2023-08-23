@@ -18,3 +18,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* custom-antd.css */
+
+/* Thay đổi màu border*/
+.ant-input-search {
+  border: 1px solid red;
+}
+/* Định dạng biểu tượng tìm kiếm khi hover */
+.ant-input-search-button {
+  transition: none;
+  border: none;
+}
+.ant-input-search-button:hover .anticon-search {
+  color: red;
+}

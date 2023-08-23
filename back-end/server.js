@@ -31,6 +31,8 @@ mongoose
 
 // get menu
 app.get("/getProducts", async (req, res) => {
+  
+
   try {
     const foods = await ProductModel.find();
     const drinks = await DrinkModel.find();
@@ -49,11 +51,20 @@ app.get("/getProducts/:id", async (req, res) => {
   const id = req.params.id;
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
+  const searchKey = req.query.searchKey;
+
   const skip = (page - 1) * limit;
   try {
-    const products = await ProductsListModel.find({ menuId: id })
+    let query = { menuId: id };
+    // filter search
+    if (searchKey) {
+      query.$and = [{ title: { $regex: searchKey, $options: "i" } }];
+    }
+
+    const products = await ProductsListModel.find(query)
       .skip(skip)
       .limit(limit);
+
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: "Lỗi khi lấy dữ liệu từ MongoDB" });
